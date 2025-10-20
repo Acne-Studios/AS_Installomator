@@ -348,8 +348,8 @@ if [[ $(/usr/bin/arch) == "arm64" ]]; then
         rosetta2=no
     fi
 fi
-VERSION="10.9beta"
-VERSIONDATE="2025-09-24"
+VERSION="10.9beta-acne1"
+VERSIONDATE="2025-10-20"
 
 # MARK: Functions
 
