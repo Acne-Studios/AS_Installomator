@@ -348,8 +348,8 @@ if [[ $(/usr/bin/arch) == "arm64" ]]; then
         rosetta2=no
     fi
 fi
-VERSION="10.9beta-a3"
-VERSIONDATE="2025-12-04"
+VERSION="10.9beta-a4"
+VERSIONDATE="2025-12-06"
 
 # MARK: Functions
 
@@ -9612,16 +9612,6 @@ skim)
     expectedTeamID="J33JTA7SY9"
     ;;
 
-skype)
-    name="Skype"
-    type="dmg"
-    downloadURL=$(curl -sfi https://get.skype.com/go/getskype-skypeformac | awk 'BEGIN{IGNORECASE=1} /location:/ {gsub(/\r/,"",$2); print $2}')
-    archiveName=$(basename "$downloadURL")
-    appNewVersion=$(awk -F'[-.]' '{print $2"."$3"."$4"."$5}' <<< "$archiveName")
-    versionKey="CFBundleVersion"
-    blockingProcesses=( "Skype" , "Skype Helper" )
-    expectedTeamID="AL798K98FX"
-    ;;
 slab)
     name="Slab"
     type="dmg"

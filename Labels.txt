@@ -868,7 +868,6 @@ sketchup2025
 sketchup2026
 sketchupviewer
 skim
-skype
 slab
 slack
 sloth
