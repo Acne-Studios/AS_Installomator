@@ -493,7 +493,7 @@ installAppWithPath() { # $1: path to app to install in $targetDir $2: path to fo
             message="$name, version $appNewVersion, is the latest version."
             if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
                 printlog "notifying"
-                displaynotification "$message" "No update for $name!"
+                displaynotification "$message" "Acne Studios IT"
             fi
             if [[ $DIALOG_CMD_FILE != "" ]]; then
                 updateDialog "wait" "Latest version already installed..."
@@ -518,7 +518,7 @@ installAppWithPath() { # $1: path to app to install in $targetDir $2: path to fo
             message="Cannot install $name, version $appNewVersion, as it is not compatible with the running system version."
             if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
                 printlog "notifying"
-                displaynotification "$message" "Error updating $name!"
+                displaynotification "$message" "Acne Studios IT"
             fi
             cleanupAndExit 15 "Installed macOS is too old for this app." ERROR
         fi
@@ -667,7 +667,7 @@ installFromPKG() {
                 message="$name, version $appNewVersion, is the latest version."
                 if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
                     printlog "notifying"
-                    displaynotification "$message" "No update for $name!"
+                    displaynotification "$message" "Acne Studios IT"
                 fi
                 if [[ $DIALOG_CMD_FILE != "" ]]; then
                     updateDialog "wait" "Latest version already installed..."
@@ -909,11 +909,7 @@ finishing() {
 
     if [[ $currentUser != "loginwindow" && ( $NOTIFY == "success" || $NOTIFY == "all" ) ]]; then
         printlog "notifying"
-        if [[ $updateDetected == "YES" ]]; then
-            displaynotification "$message" "$name update complete!"
-        else
-            displaynotification "$message" "$name installation complete!"
-        fi
+        displaynotification "$message" "Acne Studios IT"
     fi
 }
 
