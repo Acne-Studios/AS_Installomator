@@ -221,7 +221,7 @@ if [[ -n $appNewVersion ]]; then
                 message="$name, version $appNewVersion, is the latest version."
                 if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
                     printlog "notifying"
-                    displaynotification "$message" "No update for $name!"
+                    displaynotification "$message" "Acne Studios IT"
                 fi
                 if [[ $DIALOG_CMD_FILE != "" ]]; then
                     updateDialog "complete" "Latest version already installed..."
@@ -262,11 +262,7 @@ else
     printlog "Downloading $downloadURL to $archiveName" REQ
     if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
         printlog "notifying"
-        if [[ $updateDetected == "YES" ]]; then
-            displaynotification "Downloading $name update" "Download in progress …"
-        else
-            displaynotification "Downloading new $name" "Download in progress …"
-        fi
+        displaynotification "Downloading $name..." "Acne Studios IT"
     fi
 
     if [[ $DIALOG_CMD_FILE != "" ]]; then
@@ -302,11 +298,7 @@ else
         message="$name update/installation failed. This will be logged, so IT can follow up."
         if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
             printlog "notifying"
-            if [[ $updateDetected == "YES" ]]; then
-                displaynotification "$message" "Error updating $name"
-            else
-                displaynotification "$message" "Error installing $name"
-            fi
+            displaynotification "$message" "Acne Studios IT"
         fi
         if [[ $archiveType == *ASCII* ]]; then
             firstLines=$(head -c 51170 $archiveName)
@@ -336,13 +328,8 @@ fi
 printlog "Installing $name" REQ
 if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
     printlog "notifying"
-    if [[ $updateDetected == "YES" ]]; then
-        displaynotification "Updating $name" "Installation in progress …"
-        updateDialog "wait" "Updating..."
-    else
-        displaynotification "Installing $name" "Installation in progress …"
-        updateDialog "wait" "Installing..."
-    fi
+    displaynotification "Installing $name..." "Acne Studios IT"
+    updateDialog "wait" "Installing..."
 fi
 
 if [ -n "$installerTool" ]; then

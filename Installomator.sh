@@ -28,8 +28,10 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 # debug mode 1 will download to the directory the script is run in, but will not check the version
 # debug mode 2 will download to the temp directory, check for blocking processes, check the version, but will not install anything or remove the current version
 DEBUG=0
+DEBUG=0
 
 # notify behavior
+NOTIFY=silent
 NOTIFY=silent
 # options:
 #   - success      notify the user on success
@@ -84,6 +86,7 @@ BLOCKING_PROCESS_ACTION=tell_user_then_kill
 
 
 # logo-icon used in dialog boxes if app is blocking
+LOGO=/Library/Management/AcneStudiosBranding/ASIcon.icns
 LOGO=/Library/Management/AcneStudiosBranding/ASIcon.icns
 # options:
 #   - appstore      Icon is Apple App Store (default)
@@ -181,6 +184,7 @@ DIALOG_LIST_ITEM_NAME=""
 # listitem.
 # When the variable is unset, progress will be sent to Swift Dialog's main progress bar.
 
+NOTIFY_DIALOG=1
 NOTIFY_DIALOG=1
 # If this variable is set to 1, then we will check for installed Swift Dialog v. 2 or later, and use that for notification
 
