@@ -349,7 +349,7 @@ if [[ $(/usr/bin/arch) == "arm64" ]]; then
     fi
 fi
 VERSION="10.9beta-a5"
-VERSIONDATE="2025-12-07"
+VERSIONDATE="2025-12-08"
 
 # MARK: Functions
 
@@ -8719,7 +8719,6 @@ postman)
 	elif [[ $(arch) == "i386" ]]; then
 		downloadURL="https://dl.pstmn.io/download/latest/osx_64"
 	fi
-	appNewVersion=$(getJSONValue "$(curl -fsL 'https://www.postman.com/mkapi/release.json?t=')" 'notes[0].version')
     expectedTeamID="H7H8Q7M5CK"
     ;;
 powermonitor)
