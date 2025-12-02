@@ -28,10 +28,8 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 # debug mode 1 will download to the directory the script is run in, but will not check the version
 # debug mode 2 will download to the temp directory, check for blocking processes, check the version, but will not install anything or remove the current version
 DEBUG=0
-DEBUG=0
 
 # notify behavior
-NOTIFY=silent
 NOTIFY=silent
 # options:
 #   - success      notify the user on success
@@ -86,7 +84,6 @@ BLOCKING_PROCESS_ACTION=tell_user_then_kill
 
 
 # logo-icon used in dialog boxes if app is blocking
-LOGO=/Library/Management/AcneStudiosBranding/ASIcon.icns
 LOGO=/Library/Management/AcneStudiosBranding/ASIcon.icns
 # options:
 #   - appstore      Icon is Apple App Store (default)
@@ -184,7 +181,6 @@ DIALOG_LIST_ITEM_NAME=""
 # listitem.
 # When the variable is unset, progress will be sent to Swift Dialog's main progress bar.
 
-NOTIFY_DIALOG=1
 NOTIFY_DIALOG=1
 # If this variable is set to 1, then we will check for installed Swift Dialog v. 2 or later, and use that for notification
 
@@ -352,8 +348,8 @@ if [[ $(/usr/bin/arch) == "arm64" ]]; then
         rosetta2=no
     fi
 fi
-VERSION="10.9beta-a4"
-VERSIONDATE="2025-12-06"
+VERSION="10.9beta-a5"
+VERSIONDATE="2025-12-02"
 
 # MARK: Functions
 
@@ -850,7 +846,7 @@ installAppWithPath() { # $1: path to app to install in $targetDir $2: path to fo
             message="$name, version $appNewVersion, is the latest version."
             if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
                 printlog "notifying"
-                displaynotification "$message" "No update for $name!"
+                displaynotification "$message" "Acne Studios IT"
             fi
             if [[ $DIALOG_CMD_FILE != "" ]]; then
                 updateDialog "wait" "Latest version already installed..."
@@ -875,7 +871,7 @@ installAppWithPath() { # $1: path to app to install in $targetDir $2: path to fo
             message="Cannot install $name, version $appNewVersion, as it is not compatible with the running system version."
             if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
                 printlog "notifying"
-                displaynotification "$message" "Error updating $name!"
+                displaynotification "$message" "Acne Studios IT"
             fi
             cleanupAndExit 15 "Installed macOS is too old for this app." ERROR
         fi
@@ -1024,7 +1020,7 @@ installFromPKG() {
                 message="$name, version $appNewVersion, is the latest version."
                 if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
                     printlog "notifying"
-                    displaynotification "$message" "No update for $name!"
+                    displaynotification "$message" "Acne Studios IT"
                 fi
                 if [[ $DIALOG_CMD_FILE != "" ]]; then
                     updateDialog "wait" "Latest version already installed..."
@@ -1266,11 +1262,7 @@ finishing() {
 
     if [[ $currentUser != "loginwindow" && ( $NOTIFY == "success" || $NOTIFY == "all" ) ]]; then
         printlog "notifying"
-        if [[ $updateDetected == "YES" ]]; then
-            displaynotification "$message" "$name update complete!"
-        else
-            displaynotification "$message" "$name installation complete!"
-        fi
+        displaynotification "$message" "Acne Studios IT"
     fi
 }
 
@@ -1595,7 +1587,7 @@ valuesfromarguments)
 4kvideodownloaderplus)
     name="4K Video Downloader+"
     type="dmg"
-    if [[ $(/usr/bin/arch) == "arm64" ]]; then
+    if [[ $(/usr/bin/arch) == "arm64" ]]; then 
         downloadURL="$(curl -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" -fsL "https://www.4kdownload.com/downloads/34" | grep -E -o "https:\/\/dl\.4kdownload\.com\/app\/4kvideodownloaderplus.*arm64.*?.dmg\?source=website" | head -1)"
     else
         downloadURL="$(curl -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" -fsL "https://www.4kdownload.com/downloads/34" | grep -E -o "https:\/\/dl\.4kdownload\.com\/app\/4kvideodownloaderplus.*x64.*?.dmg\?source=website" | head -1)"
@@ -2915,7 +2907,7 @@ busycal)
     appNewVersion=$( curl -ILs "https://www.busymac.com/download/BusyCal.dmg" | grep -m 1 -i '^location' | sed 's/.*bcl-//' | sed 's/.dmg//' )
     expectedTeamID="N4RA379GBW"
     ;;
-
+    
 busycontacts)
     name="BusyContacts"
     type="dmg"
@@ -4134,7 +4126,7 @@ dragonframe2024)
     versionKey="CFBundleShortVersionString"
     expectedTeamID="PG7SM8SD8M"
     ;;
-
+    
 dragonframe2025)
     name="DragonFrame 2025"
     type="pkg"
@@ -4220,7 +4212,7 @@ drracket)
     appName="${folderName}/DrRacket.app"
     expectedTeamID="MHDH6AFHDR"
     ;;
-
+    
 druvainsync)
     name="Druva inSync"
     type="pkgInDmg"
@@ -4421,7 +4413,7 @@ egnytewebedit)
     appName="Egnyte WebEdit.app"
     blockingProcesses=( NONE )
     ;;
-
+    
 elasticvue)
     name="elasticvue"
     type="dmg"
@@ -4443,7 +4435,7 @@ elevate24)
     appNewVersion="$(versionFromGit Jigsaw24 Elevate24)"
     expectedTeamID="BVDW99KYDU"
     ;;
-
+    
 elgatocamerahub)
     name="Elgato Camera Hub"
     type="pkg"
@@ -4927,7 +4919,7 @@ com.Image-Line.pkg.24ONLINE"
         sed 's/.*"version":"\([0-9.]*\)".*/\1/')
     expectedTeamID="N68WEP5ZZZ"
     ;;
-
+    
 flux)
     name="Flux"
     type="zip"
@@ -4991,9 +4983,9 @@ franz)
     name="Franz"
     type="dmg"
     if [[ $(arch) = "arm64" ]]; then
-        archiveName="Franz-[0-9.]*-arm64.dmg"
-    else
-        archiveName="Franz-[0-9.]*.dmg"
+        archiveName="Franz-[0-9.]*-arm64.dmg" 
+    else 
+        archiveName="Franz-[0-9.]*.dmg" 
     fi
     downloadURL="$(downloadURLFromGit meetfranz franz)"
     appNewVersion="$(versionFromGit meetfranz franz)"
@@ -5077,7 +5069,7 @@ gdevelop)
     if [[ $(arch) == arm64 ]]; then
         archiveName="GDevelop-5-[0-9.]*-arm64.dmg"
     elif [[ $(arch) == i386 ]]; then
-        archiveName="GDevelop-5-[0-9.]*.dmg"
+        archiveName="GDevelop-5-[0-9.]*.dmg" 
     fi
     appNewVersion="$(versionFromGit 4ian GDevelop)"
     downloadURL="$(downloadURLFromGit 4ian GDevelop)"
@@ -5191,7 +5183,7 @@ glpiagent)
     packageID="com.teclib.glpi-agent"
     appNewVersion="$(versionFromGit glpi-project glpi-agent)"
     downloadURL="https://github.com/glpi-project/glpi-agent/releases/download/${appNewVersion}/GLPI-Agent-${appNewVersion}_"$(uname -m)".pkg"
-    versionKey="CFBundleShortVersionString"
+    versionKey="CFBundleShortVersionString"  
     expectedTeamID="H7XJV96LX2"
     blockingProcesses=( NONE )
     ;;
@@ -5391,8 +5383,8 @@ grasshopper)
 grooveomnidialerenterpriseedition)
 	name="Groove Omnidialer Enterprise Edition"
 	type="zip"
-	appNewVersion=$( curl -fs 'https://groove-dialer.s3.us-west-2.amazonaws.com/electron/enterprise/latest-mac.yml' | grep ^version: | cut -c 10-21 )
-	downloadURL="https://groove-dialer.s3.us-west-2.amazonaws.com/electron/enterprise/Groove+OmniDialer+Enterprise+Edition-"$appNewVersion"-universal-mac.zip"
+	appNewVersion=$( curl -fs 'https://groove-dialer.s3.us-west-2.amazonaws.com/electron/enterprise/latest-mac.yml' | grep ^version: | cut -c 10-21 ) 
+	downloadURL="https://groove-dialer.s3.us-west-2.amazonaws.com/electron/enterprise/Groove+OmniDialer+Enterprise+Edition-"$appNewVersion"-universal-mac.zip" 
 	expectedTeamID="ZDYDJ5XPF3"
 ;;
 guardianbrowser)
@@ -5487,7 +5479,7 @@ hoppscotch)
     if [[ $(arch) == arm64 ]]; then
         archiveName="Hoppscotch_mac_aarch64.dmg"
     elif [[ $(arch) == i386 ]]; then
-        archiveName="Hoppscotch_mac_x64.dmg"
+        archiveName="Hoppscotch_mac_x64.dmg" 
     fi
     downloadURL="$(downloadURLFromGit hoppscotch releases)"
     appNewVersion="$(versionFromGit hoppscotch releases)"
@@ -6312,7 +6304,7 @@ keybase)
         appNewVersion=$( curl -sfL https://prerelease.keybase.io/update-darwin-prod-v2.json | grep '"version": '  | awk '{print $2}' | awk -F\" '{print $2}' )
     fi
     expectedTeamID="99229SGT5K"
-    ;;
+    ;; 
 keyboardmaestro)
     # credit: Søren Theilgaard (@theilgaard)
     name="Keyboard Maestro"
@@ -6596,7 +6588,7 @@ linear)
     appName="Linear.app"
     blockingProcesses=( "Linear" )
     ;;
-
+    
 linearmouse)
     name="LinearMouse"
     type="dmg"
@@ -6733,7 +6725,7 @@ lowprofile)
     ;;
 lsagent)
     name="LsAgent-osx"
-    #Description: Lansweeper is an IT Asset Management solution. This label installs the latest version.
+    #Description: Lansweeper is an IT Asset Management solution. This label installs the latest version. 
     #Download: https://www.lansweeper.com/download/lsagent/
     #Icon: https://www.lansweeper.com/wp-content/uploads/2018/08/LsAgent-Scanning-Agent.png
     #Usage:
@@ -6743,7 +6735,7 @@ lsagent)
     #                                              Default: none
     #                                              Allowed: none minimal minimalWithDialogs
     #  --optionfile <optionfile>                   Installation option file
-    #                                              Default:
+    #                                              Default: 
     #  --debuglevel <debuglevel>                   Debug information level of verbosity
     #                                              Default: 2
     #                                              Allowed: 0 1 2 3 4
@@ -6751,18 +6743,18 @@ lsagent)
     #                                              Default: osx
     #                                              Allowed: osx text unattended
     #  --debugtrace <debugtrace>                   Debug filename
-    #                                              Default:
+    #                                              Default: 
     #  --installer-language <installer-language>   Language selection
     #                                              Default: en
     #                                              Allowed: sq ar es_AR az eu pt_BR bg ca hr cs da nl en et fi fr de el he hu id it ja kk ko lv lt no fa pl pt ro ru sr zh_CN sk sl es sv th zh_TW tr tk uk va vi cy
     #  --prefix <prefix>                           Installation Directory
     #                                              Default: /Applications/LansweeperAgent
     #  --server <server>                           FQDN, NetBios or IP of the Scanning Server
-    #                                              Default:
+    #                                              Default: 
     #  --port <port>                               Listening Port on the Scanning Server
     #                                              Default: 9524
     #  --agentkey <agentkey>                       Cloud Relay Authentication Key (Optional)
-    #                                              Default:
+    #                                              Default: 
     type="dmg"
     downloadURL="https://content.lansweeper.com/lsagent-mac/"
     appNewVersion="$(curl -fsIL "$downloadURL" | grep -i "location" | cut -w -f2 | cut -d "/" -f5-6 | tr "/" ".")"
@@ -7152,7 +7144,7 @@ microsoftazurestorageexplorer)
     if [[ $(arch) == arm64 ]]; then
         archiveName="StorageExplorer-darwin-arm64.zip"
     elif [[ $(arch) == i386 ]]; then
-        archiveName="StorageExplorer-darwin-x64.zip"
+        archiveName="StorageExplorer-darwin-x64.zip" 
     fi
     downloadURL=$(downloadURLFromGit microsoft AzureStorageExplorer )
     appNewVersion=$(versionFromGit microsoft AzureStorageExplorer )
@@ -8162,7 +8154,7 @@ obs)
     fi
     appNewVersion=$(curl -fs "$SUFeedURL" | xpath '(//rss/channel/item[sparkle:channel="stable"]/sparkle:shortVersionString/text())[1]' 2>/dev/null)
     downloadURL=$(curl -fs "$SUFeedURL" | xpath 'string(//rss/channel/item[sparkle:channel="stable"]/enclosure/@url[1])' 2>/dev/null)
-    archiveName=$(basename "$downloadURL")
+    archiveName=$(basename "$downloadURL")   
     versionKey="CFBundleShortVersionString"
     blockingProcesses=( "OBS Studio" )
     expectedTeamID="2MMRE5MTB8"
@@ -8392,7 +8384,7 @@ orcaslicer)
     fi
     expectedTeamID="XQK7C38HH5"
     ;;
-
+    
 origin)
      name="Origin"
      type="dmg"
@@ -8551,7 +8543,7 @@ patchomator)
     expectedTeamID="4VAAB6AM7X"
     ;;
 pcoipclient)
-    # Note that the sed match removes 'pcoip-client_' and '.dmg'
+    # Note that the sed match removes 'pcoip-client_' and '.dmg' 
     name="PCoIPClient"
     type="dmg"
     downloadURL="https://dl.teradici.com/DeAdBCiUYInHcSTy/pcoip-client/raw/names/pcoip-client-dmg/versions/latest/pcoip-client_latest.dmg"
@@ -8740,7 +8732,7 @@ powermonitor)
 praat)
     name="Praat"
     type="dmg"
-    praatVersion="$(curl -fs https://www.fon.hum.uva.nl/praat/download_mac.html | grep "for Intel and Apple Silicon):" | cut -d '_' -f2 | cut -c15-)"
+    praatVersion="$(curl -fs https://www.fon.hum.uva.nl/praat/download_mac.html | grep "for Intel and Apple Silicon):" | cut -d '_' -f2 | cut -c15-)" 
     downloadURL="https://www.fon.hum.uva.nl/praat/praat${praatVersion}_mac.dmg"
     appNewVersion="${praatVersion:0:1}.${praatVersion:1:1}.${praatVersion:2:2}"
     expectedTeamID="J9C6R9XA5W"
@@ -9462,7 +9454,7 @@ secretive)
     appNewVersion=$(versionFromGit maxgoedjen secretive)
     expectedTeamID="Z72PRUAWF6"
     ;;
-
+    
 selfcontrol)
     name="SelfControl"
     type="zip"
@@ -10367,7 +10359,7 @@ tableplus)
     versionKey="CFBundleVersion"
     expectedTeamID="3X57WP8E8V"
     ;;
-
+    
 tageditor)
      name="Tag Editor"
      type="dmg"
@@ -10664,7 +10656,7 @@ toonboomharmonypremium2024)
     versionKey="CFBundleVersion"
     expectedTeamID="U5LPYJSPQ3"
     ;;
-
+    
 toonboomharmonypremium2025)
     name="Harmony 25 Premium"
     type="dmg"
@@ -10688,7 +10680,7 @@ toonboomstoryboardpro2024)
     versionKey="CFBundleVersion"
     expectedTeamID="U5LPYJSPQ3"
     ;;
-
+    
 toonboomstoryboardpro2025)
     name="Storyboard Pro 25"
     type="dmg"
@@ -11149,7 +11141,7 @@ virtualboxstable)
     if [[ $(arch) == "arm64" ]]; then
         if [[ ! -z "$(curl -fs "https://download.virtualbox.org/virtualbox/${appNewVersion}/" | grep "macOSArm64")" ]]; then
             downloadURL="https://download.virtualbox.org/virtualbox/${appNewVersion}/$(curl -fs "https://download.virtualbox.org/virtualbox/${appNewVersion}/" | grep "macOSArm64" | cut -d\" -f2)"
-        else
+        else 
             downloadURL="https://download.virtualbox.org/virtualbox/${appNewVersion}/$(curl -fs "https://download.virtualbox.org/virtualbox/${appNewVersion}/" | grep "OSX.dmg" | cut -d\" -f2)"
         fi
     elif [[ $(arch) == "i386" ]]; then
@@ -11389,7 +11381,7 @@ whimsical)
     appName="Whimsical.app"
     blockingProcesses=( "Whimsical" )
     ;;
-
+    
 whiterabbit)
 	name="White Rabbit"
 	type="dmg"
@@ -11831,7 +11823,7 @@ zulujdk21)
     fi
     expectedTeamID="TDTHCUPYFR"
     appCustomVersion(){ if [ -f "/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Info.plist" ]; then /usr/bin/defaults read "/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Info.plist" "CFBundleName" | sed 's/Zulu //'; fi }
-    appNewVersion=$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//" | sed 's/jdk//')
+    appNewVersion=$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//" | sed 's/jdk//') 
     ;;
 zulujdk23)
     name="Zulu JDK 23"
@@ -11844,7 +11836,7 @@ zulujdk23)
     fi
     expectedTeamID="TDTHCUPYFR"
     appCustomVersion(){ if [ -f "/Library/Java/JavaVirtualMachines/zulu-23.jdk/Contents/Info.plist" ]; then /usr/bin/defaults read "/Library/Java/JavaVirtualMachines/zulu-23.jdk/Contents/Info.plist" "CFBundleName" | sed 's/Zulu //'; fi }
-    appNewVersion=$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//" | sed 's/jdk//')
+    appNewVersion=$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//" | sed 's/jdk//') 
     ;;
 zulujdk8)
     name="Zulu JDK 8"
@@ -11857,7 +11849,7 @@ zulujdk8)
     fi
     expectedTeamID="TDTHCUPYFR"
     appCustomVersion(){ if [ -f "/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Info.plist" ]; then /usr/bin/defaults read "/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Info.plist" "CFBundleName" | sed 's/Zulu //'; fi }
-    appNewVersion=$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//" | sed 's/jdk//')
+    appNewVersion=$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//" | sed 's/jdk//') 
     ;;
 zulujdkfx17)
     name="Zulu JDK FX 17"
@@ -12095,7 +12087,7 @@ if [[ -n $appNewVersion ]]; then
                 message="$name, version $appNewVersion, is the latest version."
                 if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
                     printlog "notifying"
-                    displaynotification "$message" "No update for $name!"
+                    displaynotification "$message" "Acne Studios IT"
                 fi
                 if [[ $DIALOG_CMD_FILE != "" ]]; then
                     updateDialog "complete" "Latest version already installed..."
@@ -12136,11 +12128,7 @@ else
     printlog "Downloading $downloadURL to $archiveName" REQ
     if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
         printlog "notifying"
-        if [[ $updateDetected == "YES" ]]; then
-            displaynotification "Downloading $name update" "Download in progress …"
-        else
-            displaynotification "Downloading new $name" "Download in progress …"
-        fi
+        displaynotification "Downloading $name..." "Acne Studios IT"
     fi
 
     if [[ $DIALOG_CMD_FILE != "" ]]; then
@@ -12176,11 +12164,7 @@ else
         message="$name update/installation failed. This will be logged, so IT can follow up."
         if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
             printlog "notifying"
-            if [[ $updateDetected == "YES" ]]; then
-                displaynotification "$message" "Error updating $name"
-            else
-                displaynotification "$message" "Error installing $name"
-            fi
+            displaynotification "$message" "Acne Studios IT"
         fi
         if [[ $archiveType == *ASCII* ]]; then
             firstLines=$(head -c 51170 $archiveName)
@@ -12210,13 +12194,8 @@ fi
 printlog "Installing $name" REQ
 if [[ $currentUser != "loginwindow" && $NOTIFY == "all" ]]; then
     printlog "notifying"
-    if [[ $updateDetected == "YES" ]]; then
-        displaynotification "Updating $name" "Installation in progress …"
-        updateDialog "wait" "Updating..."
-    else
-        displaynotification "Installing $name" "Installation in progress …"
-        updateDialog "wait" "Installing..."
-    fi
+    displaynotification "Installing $name..." "Acne Studios IT"
+    updateDialog "wait" "Installing..."
 fi
 
 if [ -n "$installerTool" ]; then
