@@ -348,8 +348,8 @@ if [[ $(/usr/bin/arch) == "arm64" ]]; then
         rosetta2=no
     fi
 fi
-VERSION="10.9beta-a6"
-VERSIONDATE="2025-12-08"
+VERSION="10.9beta-a7"
+VERSIONDATE="2025-12-09"
 
 # MARK: Functions
 
@@ -741,7 +741,7 @@ checkRunningProcesses() {
                       fi
                       ;;
                     tell_user|tell_user_then_kill)
-                      button=$(displaydialogContinue "Quit “$x” to continue updating? (This is an important update). Wait for notification of update before launching app again." "The application “$x” needs to be updated.")
+                      button=$(displaydialogContinue "The application "$x" needs to be updated. **Quit and Update** to continue." "Acne Studios IT")
                       printlog "telling app $x to quit"
                       runAsUser osascript -e "tell app \"$x\" to quit"
                       # give the user a bit of time to quit apps
@@ -8719,6 +8719,7 @@ postman)
 	elif [[ $(arch) == "i386" ]]; then
 		downloadURL="https://dl.pstmn.io/download/latest/osx_64"
 	fi
+	appNewVersion=$(getJSONValue "$(curl -fsL 'https://www.postman.com/mkapi/release.json?t=')" 'notes[0].version')
     expectedTeamID="H7H8Q7M5CK"
     ;;
 powermonitor)
