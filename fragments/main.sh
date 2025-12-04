@@ -76,59 +76,10 @@ printlog "NOTIFY=${NOTIFY}"
 printlog "LOGGING=${LOGGING}"
 
 # NOTE: Finding LOGO to use in dialogs
-case $LOGO in
-    appstore)
-        # Apple App Store on Mac
-        if [[ $(sw_vers -buildVersion) > "19" ]]; then
-            LOGO="/System/Applications/App Store.app/Contents/Resources/AppIcon.icns"
-        else
-            LOGO="/Applications/App Store.app/Contents/Resources/AppIcon.icns"
-        fi
-        ;;
-    jamf)
-        # Jamf Pro
-        LOGO="/Library/Application Support/JAMF/Jamf.app/Contents/Resources/AppIcon.icns"
-        ;;
-    mosyleb)
-        # Mosyle Business
-        LOGO="/Applications/Self-Service.app/Contents/Resources/AppIcon.icns"
-        if [[ -z $MDMProfileName ]]; then; MDMProfileName="Mosyle Corporation MDM"; fi
-        ;;
-    mosylem)
-        # Mosyle Manager (education)
-        LOGO="/Applications/Manager.app/Contents/Resources/AppIcon.icns"
-        if [[ -z $MDMProfileName ]]; then; MDMProfileName="Mosyle Corporation MDM"; fi
-        ;;
-    addigy)
-        # Addigy
-        LOGO="/Library/Addigy/macmanage/MacManage.app/Contents/Resources/atom.icns"
-        if [[ -z $MDMProfileName ]]; then; MDMProfileName="MDM Profile"; fi
-        ;;
-    microsoft)
-        # Microsoft Endpoint Manager (Intune)
-        if [[ -d "/Library/Intune/Microsoft Intune Agent.app" ]]; then
-            LOGO="/Library/Intune/Microsoft Intune Agent.app/Contents/Resources/AppIcon.icns"
-        elif [[ -d "/Applications/Company Portal.app" ]]; then
-            LOGO="/Applications/Company Portal.app/Contents/Resources/AppIcon.icns"
-        fi
-        if [[ -z $MDMProfileName ]]; then; MDMProfileName="Management Profile"; fi
-        ;;
-    ws1)
-        # Workspace ONE (AirWatch)
-        LOGO="/Applications/Workspace ONE Intelligent Hub.app/Contents/Resources/AppIcon.icns"
-        if [[ -z $MDMProfileName ]]; then; MDMProfileName="Device Manager"; fi
-        ;;
-    kandji)
-        # Kandji
-        LOGO="/Applications/Kandji Self Service.app/Contents/Resources/AppIcon.icns"
-        if [[ -z $MDMProfileName ]]; then; MDMProfileName="MDM Profile"; fi
-        ;;
-    filewave)
-        # FileWave
-        LOGO="/usr/local/sbin/FileWave.app/Contents/Resources/fwGUI.app/Contents/Resources/kiosk.icns"
-        if [[ -z $MDMProfileName ]]; then; MDMProfileName="FileWave MDM Configuration"; fi
-        ;;
-esac
+# Always use Acne Studios branding
+LOGO="/Library/Management/AcneStudiosBranding/ASIcon.icns"
+
+# Fallback to default if Acne Studios logo doesn't exist
 if [[ ! -a "${LOGO}" ]]; then
     if [[ $(sw_vers -buildVersion) > "19" ]]; then
         LOGO="/System/Applications/App Store.app/Contents/Resources/AppIcon.icns"

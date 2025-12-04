@@ -741,7 +741,7 @@ checkRunningProcesses() {
                       fi
                       ;;
                     tell_user|tell_user_then_kill)
-                      button=$(displaydialogContinue "The application "$x" needs to be updated. **Quit and Update** to continue." "Acne Studios IT")
+                      button=$(displaydialogContinue "The application \"$x\" needs to be updated. Quit and Update to continue." "Acne Studios IT")
                       printlog "telling app $x to quit"
                       runAsUser osascript -e "tell app \"$x\" to quit"
                       # give the user a bit of time to quit apps
